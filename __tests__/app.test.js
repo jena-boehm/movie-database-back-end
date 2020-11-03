@@ -31,34 +31,69 @@ describe('app routes', () => {
       return client.end(done);
     });
 
-  test('returns animals', async() => {
+    test('returns movies', async() => {
 
-    const expectation = [
-      {
-        'id': 1,
-        'name': 'bessie',
-        'coolfactor': 3,
-        'owner_id': 1
-      },
-      {
-        'id': 2,
-        'name': 'jumpy',
-        'coolfactor': 4,
-        'owner_id': 1
-      },
-      {
-        'id': 3,
-        'name': 'spot',
-        'coolfactor': 10,
-        'owner_id': 1
-      }
-    ];
+      const expectation = [
+        {
+          id: 1,
+          name: 'Harry Potter and the Sorcerer\'s Stone',
+          year: 2001,
+          oscars: false,
+          genre: 'fantasy',
+          owner_id: 1
+        },
+        {
+          id: 2,
+          name: 'The Dark Knight',
+          year: 2008,
+          oscars: true,
+          genre: 'superhero',
+          owner_id: 1
+        },
+        {
+          id: 3,
+          name: 'Titanic',
+          year: 1997,
+          oscars: true,
+          genre: 'romance',
+          owner_id: 1
+        },
+        {
+          id: 4,
+          name: 'Dirty Dancing',
+          year: 1987,
+          oscars: true,
+          genre: 'romance',
+          owner_id: 1
+        }
+      ];
 
-    const data = await fakeRequest(app)
-      .get('/animals')
-      .expect('Content-Type', /json/)
-      .expect(200);
+      const data = await fakeRequest(app)
+        .get('/movies')
+        .expect('Content-Type', /json/)
+        .expect(200);
 
-    expect(data.body).toEqual(expectation);
+      expect(data.body).toEqual(expectation);
+    });
+
+    test('returns a single movie', async() => {
+
+      const expectation = 
+        {
+          id: 1,
+          name: 'Harry Potter and the Sorcerer\'s Stone',
+          year: 2001,
+          oscars: false,
+          genre: 'fantasy',
+          owner_id: 1
+        };
+
+      const data = await fakeRequest(app)
+        .get('/movies/1')
+        .expect('Content-Type', /json/)
+        .expect(200);
+
+      expect(data.body).toEqual(expectation);
+    });
   });
 });
