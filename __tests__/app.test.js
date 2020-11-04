@@ -95,5 +95,36 @@ describe('app routes', () => {
 
       expect(data.body).toEqual(expectation);
     });
+
+    test.only('adds a movie to the DB and returns it', async() => {
+      const expectation = {
+        id: 5,
+        name: 'Bee Movie',
+        year: 2007, 
+        oscars: false,
+        genre: 'animated',
+        owner_id: 1
+      };
+
+      const data = await fakeRequest(app)
+        .post('/movies')
+        .send({
+          name: 'Bee Movie',
+          year: 2007, 
+          oscars: false,
+          genre: 'animated',
+          owner_id: 1
+        })
+        .expect('Content-Type', /json/)
+        .expect(200);
+
+      const allMovies = await fakeRequest(app)
+        .get('/movies')
+        .expect('Content-Type', /json/)
+        .expect(200);
+
+      expect(data.body).toEqual(expectation);
+      expect(allMovies.body.length).toEqual(5);
+    });
   });
 });
