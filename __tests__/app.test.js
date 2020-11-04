@@ -76,6 +76,7 @@ describe('app routes', () => {
       expect(data.body).toEqual(expectation);
     });
 
+
     test('returns a single movie', async() => {
 
       const expectation = 
@@ -95,6 +96,7 @@ describe('app routes', () => {
 
       expect(data.body).toEqual(expectation);
     });
+
 
     test('adds a movie to the DB and returns it', async() => {
       const expectation = {
@@ -127,6 +129,7 @@ describe('app routes', () => {
       expect(allMovies.body.length).toEqual(5);
     });
 
+
     test('deletes a movie by id', async () => {
       const data = await fakeRequest(app)
         .delete('/movies/2')
@@ -139,6 +142,39 @@ describe('app routes', () => {
         .expect(200);
 
       expect(data.body).toEqual('');
+      expect(allMovies.body.length).toEqual(4);
+    });
+
+
+    test('updates a movie row', async() => {
+      const expectation = {
+        id: 3,
+        name: 'Titanic II',
+        year: 2015,
+        oscars: true,
+        genre: 'romance',
+        owner_id: 1
+      };
+      
+      const data = await fakeRequest(app)
+        .put('/movies/3')
+        .send({
+          id: 3,
+          name: 'Titanic II',
+          year: 2015,
+          oscars: true,
+          genre: 'romance',
+          owner_id: 1
+        })
+        .expect('Content-Type', /json/)
+        .expect(200);
+      
+      const allMovies = await fakeRequest(app)
+        .get('/movies')
+        .expect('Content-Type', /json/)
+        .expect(200);
+
+      expect(data.body).toEqual(expectation);
       expect(allMovies.body.length).toEqual(4);
     });
   });
