@@ -1,6 +1,7 @@
 const client = require('../lib/client');
 // import our seed data:
 const movies = require('./movies.js');
+const genres = require('./genres.js');
 const usersData = require('./users.js');
 const { getEmoji } = require('../lib/emoji.js');
 
@@ -16,9 +17,20 @@ async function run() {
         return client.query(`
                       INSERT INTO users (email, hash)
                       VALUES ($1, $2)
-                      RETURNING *;
+                      RETURNING *
                   `,
         [user.email, user.hash]);
+      })
+    );
+
+    await Promise.all(
+      genres.map(genre => {
+        return client.query(`
+        INSERT INTO genres (genre)
+        VALUES ($1)
+        RETURNING *
+        `,
+        [genre.genre]);
       })
     );
       
@@ -27,10 +39,10 @@ async function run() {
     await Promise.all(
       movies.map(movie => {
         return client.query(`
-                    INSERT INTO movies (name, year, oscars, genre, owner_id)
+                    INSERT INTO movies (name, year, oscars, genre_id, owner_id)
                     VALUES ($1, $2, $3, $4, $5);
                 `,
-        [movie.name, movie.year, movie.oscars, movie.genre, user.id]);
+        [movie.name, movie.year, movie.oscars, movie.genre_id, user.id]);
       })
     );
     

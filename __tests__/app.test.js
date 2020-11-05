@@ -39,7 +39,7 @@ describe('app routes', () => {
           name: 'Harry Potter and the Sorcerer\'s Stone',
           year: 2001,
           oscars: false,
-          genre: 'fantasy',
+          genre_id: 1,
           owner_id: 1
         },
         {
@@ -47,7 +47,7 @@ describe('app routes', () => {
           name: 'The Dark Knight',
           year: 2008,
           oscars: true,
-          genre: 'superhero',
+          genre_id: 2,
           owner_id: 1
         },
         {
@@ -55,7 +55,7 @@ describe('app routes', () => {
           name: 'Titanic',
           year: 1997,
           oscars: true,
-          genre: 'romance',
+          genre_id: 3,
           owner_id: 1
         },
         {
@@ -63,7 +63,7 @@ describe('app routes', () => {
           name: 'Dirty Dancing',
           year: 1987,
           oscars: true,
-          genre: 'romance',
+          genre_id: 3,
           owner_id: 1
         }
       ];
@@ -85,7 +85,7 @@ describe('app routes', () => {
           name: 'Harry Potter and the Sorcerer\'s Stone',
           year: 2001,
           oscars: false,
-          genre: 'fantasy',
+          genre_id: 1,
           owner_id: 1
         };
 
@@ -104,7 +104,7 @@ describe('app routes', () => {
         name: 'Bee Movie',
         year: 2007, 
         oscars: false,
-        genre: 'animated',
+        genre_id: 3,
         owner_id: 1
       };
 
@@ -114,7 +114,7 @@ describe('app routes', () => {
           name: 'Bee Movie',
           year: 2007, 
           oscars: false,
-          genre: 'animated',
+          genre_id: 3,
           owner_id: 1
         })
         .expect('Content-Type', /json/)
@@ -152,7 +152,7 @@ describe('app routes', () => {
         name: 'Titanic II',
         year: 2015,
         oscars: true,
-        genre: 'romance',
+        genre_id: 3,
         owner_id: 1
       };
       
@@ -163,7 +163,7 @@ describe('app routes', () => {
           name: 'Titanic II',
           year: 2015,
           oscars: true,
-          genre: 'romance',
+          genre_id: 3,
           owner_id: 1
         })
         .expect('Content-Type', /json/)
