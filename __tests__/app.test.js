@@ -39,7 +39,7 @@ describe('app routes', () => {
           name: 'Harry Potter and the Sorcerer\'s Stone',
           year: 2001,
           oscars: false,
-          genre_id: 1,
+          genre: 'Fantasy',
           owner_id: 1
         },
         {
@@ -47,7 +47,7 @@ describe('app routes', () => {
           name: 'The Dark Knight',
           year: 2008,
           oscars: true,
-          genre_id: 2,
+          genre: 'Superhero',
           owner_id: 1
         },
         {
@@ -55,7 +55,7 @@ describe('app routes', () => {
           name: 'Titanic',
           year: 1997,
           oscars: true,
-          genre_id: 3,
+          genre: 'Romance',
           owner_id: 1
         },
         {
@@ -63,13 +63,38 @@ describe('app routes', () => {
           name: 'Dirty Dancing',
           year: 1987,
           oscars: true,
-          genre_id: 3,
+          genre: 'Romance',
           owner_id: 1
         }
       ];
 
       const data = await fakeRequest(app)
         .get('/movies')
+        .expect('Content-Type', /json/)
+        .expect(200);
+
+      expect(data.body).toEqual(expectation);
+    });
+
+    test('returns genres', async() => {
+
+      const expectation = [
+        {
+          id: 1,
+          genre: 'Fantasy'
+        },
+        {
+          id: 2,
+          genre: 'Superhero'
+        },
+        {
+          id: 3,
+          genre: 'Romance'
+        }
+      ];
+
+      const data = await fakeRequest(app)
+        .get('/genres')
         .expect('Content-Type', /json/)
         .expect(200);
 
