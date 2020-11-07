@@ -7,5 +7,20 @@ module.exports = [
   },
   {
     genre: 'Romance'
+  },
+  {
+    genre: 'Comedy'
+  },
+  {
+    genre: 'Horror'
+  },
+  {
+    genre: 'Drama'
+  },
+  {
+    genre: 'Action'
+  },
+  {
+    genre: 'Other'
   }
 ];

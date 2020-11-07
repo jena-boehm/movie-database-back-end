@@ -90,6 +90,26 @@ describe('app routes', () => {
         {
           id: 3,
           genre: 'Romance'
+        },
+        {
+          id: 4,
+          genre: 'Comedy'
+        },
+        {
+          id: 5,
+          genre: 'Horror'
+        },
+        {
+          id: 6,
+          genre: 'Drama'
+        },
+        {
+          id: 7,
+          genre: 'Action'
+        },
+        {
+          id: 8,
+          genre: 'Other'
         }
       ];
 
