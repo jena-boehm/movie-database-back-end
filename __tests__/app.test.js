@@ -39,7 +39,7 @@ describe('app routes', () => {
           name: 'Harry Potter and the Sorcerer\'s Stone',
           year: 2001,
           oscars: false,
-          genre: 'fantasy',
+          genre: 'Fantasy',
           owner_id: 1
         },
         {
@@ -47,7 +47,7 @@ describe('app routes', () => {
           name: 'The Dark Knight',
           year: 2008,
           oscars: true,
-          genre: 'superhero',
+          genre: 'Superhero',
           owner_id: 1
         },
         {
@@ -55,7 +55,7 @@ describe('app routes', () => {
           name: 'Titanic',
           year: 1997,
           oscars: true,
-          genre: 'romance',
+          genre: 'Romance',
           owner_id: 1
         },
         {
@@ -63,13 +63,58 @@ describe('app routes', () => {
           name: 'Dirty Dancing',
           year: 1987,
           oscars: true,
-          genre: 'romance',
+          genre: 'Romance',
           owner_id: 1
         }
       ];
 
       const data = await fakeRequest(app)
         .get('/movies')
+        .expect('Content-Type', /json/)
+        .expect(200);
+
+      expect(data.body).toEqual(expectation);
+    });
+
+    test('returns genres', async() => {
+
+      const expectation = [
+        {
+          id: 1,
+          genre: 'Fantasy'
+        },
+        {
+          id: 2,
+          genre: 'Superhero'
+        },
+        {
+          id: 3,
+          genre: 'Romance'
+        },
+        {
+          id: 4,
+          genre: 'Comedy'
+        },
+        {
+          id: 5,
+          genre: 'Horror'
+        },
+        {
+          id: 6,
+          genre: 'Drama'
+        },
+        {
+          id: 7,
+          genre: 'Action'
+        },
+        {
+          id: 8,
+          genre: 'Other'
+        }
+      ];
+
+      const data = await fakeRequest(app)
+        .get('/genres')
         .expect('Content-Type', /json/)
         .expect(200);
 
@@ -85,7 +130,7 @@ describe('app routes', () => {
           name: 'Harry Potter and the Sorcerer\'s Stone',
           year: 2001,
           oscars: false,
-          genre: 'fantasy',
+          genre_id: 1,
           owner_id: 1
         };
 
@@ -104,7 +149,7 @@ describe('app routes', () => {
         name: 'Bee Movie',
         year: 2007, 
         oscars: false,
-        genre: 'animated',
+        genre_id: 3,
         owner_id: 1
       };
 
@@ -114,7 +159,7 @@ describe('app routes', () => {
           name: 'Bee Movie',
           year: 2007, 
           oscars: false,
-          genre: 'animated',
+          genre_id: 3,
           owner_id: 1
         })
         .expect('Content-Type', /json/)
@@ -152,7 +197,7 @@ describe('app routes', () => {
         name: 'Titanic II',
         year: 2015,
         oscars: true,
-        genre: 'romance',
+        genre_id: 3,
         owner_id: 1
       };
       
@@ -163,7 +208,7 @@ describe('app routes', () => {
           name: 'Titanic II',
           year: 2015,
           oscars: true,
-          genre: 'romance',
+          genre_id: 3,
           owner_id: 1
         })
         .expect('Content-Type', /json/)

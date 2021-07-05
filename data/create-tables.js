@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const client = require('../lib/client');
 const { getEmoji } = require('../lib/emoji.js');
 
@@ -16,13 +17,17 @@ async function run() {
                     id SERIAL PRIMARY KEY,
                     email VARCHAR(256) NOT NULL,
                     hash VARCHAR(512) NOT NULL
-                );           
+                );    
+                CREATE TABLE genres (
+                  id SERIAL PRIMARY KEY,
+                  genre VARCHAR(256) NOT NULL
+                );          
                 CREATE TABLE movies (
                     id SERIAL PRIMARY KEY NOT NULL,
                     name VARCHAR(512) NOT NULL,
                     year INTEGER NOT NULL,
                     oscars BOOLEAN NOT NULL,
-                    genre VARCHAR(512) NOT NULL,
+                    genre_id INTEGER NOT NULL REFERENCES genres(id),
                     owner_id INTEGER NOT NULL REFERENCES users(id)
             );
         `);
